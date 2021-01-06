@@ -20,4 +20,26 @@ class CategoricalImputer(BaseEsimator, TransformerMixin):
         for feature in self.variables:
             X[feature] = X[feature].fillna('Missing')
 
-        return x
+        return X
+
+#Numerical missing value imputer
+class NumericalImputer(BaseEsimator, TransformerMixin):
+
+    def __init__(self, variables=None):
+        if not isinstance(variables, list):
+            self.variables = [variables]
+        else:
+            self.variables = variables
+
+    def fit(self, X, y=None):
+        #persist mode in a dictionary
+        self.imputer_dict_ = dict()
+        for feature in self.variables:
+            self.imputer_dict_[feature] = X[feature].mode()[0]
+        return self
+
+    def transform(self, X):
+        X = X.copy()
+        for feature in self.variables:
+            X[feature].fillna(self.imputer_dict_[feature], inplace=True)
+        return X
