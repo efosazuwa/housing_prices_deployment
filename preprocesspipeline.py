@@ -43,3 +43,22 @@ class NumericalImputer(BaseEsimator, TransformerMixin):
         for feature in self.variables:
             X[feature].fillna(self.imputer_dict_[feature], inplace=True)
         return X
+
+#Temporal variable calculator
+class TemporalVariableEstimator(BaseEstimator, TransformerMixin):
+
+    def __init__(self, variables=None, reference_variable=None):
+        if not isinstance(variables, list):
+            self.variables = [variables]
+        else:
+            self.variables = variables
+
+        self.reference_variable = reference_variable
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        X = X.copy()
+        for feature in self.variables:
+            X
