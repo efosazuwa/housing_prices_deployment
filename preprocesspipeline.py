@@ -53,7 +53,7 @@ class TemporalVariableEstimator(BaseEstimator, TransformerMixin):
         else:
             self.variables = variables
 
-        self.reference_variable = reference_variable
+        self.reference_variables = reference_variable
 
     def fit(self, X, y=None):
         return self
@@ -61,4 +61,6 @@ class TemporalVariableEstimator(BaseEstimator, TransformerMixin):
     def transform(self, X):
         X = X.copy()
         for feature in self.variables:
-            X
+            X[feature] = X[self.reference_variables] - X[feature]
+
+        return X
