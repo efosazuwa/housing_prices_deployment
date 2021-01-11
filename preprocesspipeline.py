@@ -124,5 +124,31 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
             null_counts = X[self.variables].isnull().any()
             vars_ = {key: value for key, value in null_counts.items() if value
                      is True}
-            raise errors.InvalidModelInputError("Categorical encoder introduced Nan when transforming categorical variables: {}".format(vars.keys()))
+            raise errors.InvalidModelInputError("Categorical encoder introduced Nan when transforming categorical variables: {}".format(vars_.keys()))
+        return X
+
+#logarithmic Transformer
+class LogTransformer(BaseEstimator, TransformerMixin):
+
+    def __init__(self, variables=None):
+        if not isinstance(variables, list):
+            self.variables = [variables]
+        else:
+            self.variables = variables
+
+    def fit(self, X, y=None):
+        #to accomadate pipelline
+        return self
+
+    def transform(self, X):
+        X = X.copy()
+
+        #Check that values are nonnegative for log transformation
+        if not (X[self.variables]>0).all().all():
+            vars_ = self.variables[(X[self.variables] <= 0).any()]
+            raise errors.InvalidModelInputError("Variables contain 0 or negative values, can't apply log for vars: {}".format(vars_))
+
+        for feature in self.variables:
+            X[feature] = np.log(X[feature])
+
         return X
