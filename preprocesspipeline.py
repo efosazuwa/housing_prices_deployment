@@ -152,3 +152,7 @@ class LogTransformer(BaseEstimator, TransformerMixin):
             X[feature] = np.log(X[feature])
 
         return X
+
+class DropUnecessaryFeatures(BaseEstimator, TransformerMixin):
+
+    def __init__
