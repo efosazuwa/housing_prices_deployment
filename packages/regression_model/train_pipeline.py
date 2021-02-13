@@ -22,5 +22,12 @@ FEATURES = ['MSSubClass', 'MSZoning', 'Neighborhood', 'OverallQual',
 
 def save_pipeline() -> None:
     """Persist the pipeline."""
-    
+
     pass
+
+def run_training() -> None:
+    """Train the model"""
+    print("Training...")
+
+if __name__ == '__main__':
+    run_training()
