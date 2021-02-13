@@ -1,5 +1,11 @@
 import pathlib
 
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.externals import joblib
+
+import pipeline
 
 PACKAGE_ROOT = pathlib.Path(__file__).resolve().parent
 TRAINED_MODEL_DIR = PACKAGE_ROOT / 'trained_models'
@@ -20,10 +26,13 @@ FEATURES = ['MSSubClass', 'MSZoning', 'Neighborhood', 'OverallQual',
             # this variable is only to calculate temporal variable:
             'YrSold']
 
-def save_pipeline() -> None:
+def save_pipeline(*, pipeline_to_persist) -> None:
     """Persist the pipeline."""
 
-    pass
+    save_file_name = 'regression_model.pkl'
+    save_path = TRAINED_MODEL_DIR / save_file_name
+    joblib.dump(pipeline_to_persist, save_path)
+    print("saved pipeline")
 
 def run_training() -> None:
     """Train the model"""
