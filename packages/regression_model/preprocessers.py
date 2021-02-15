@@ -12,10 +12,10 @@ class CategoricalImputer(BaseEsimator, TransformerMixin):
         else:
             self.variables = variables
 
-    def fit(self, X, y=None):
+    def fit(self, X, y=None) -> 'CategoricalImputer':
         return self
 
-    def transform(self, X):
+    def transform(self, X) -> pd.DataFrame:
         X = X.copy()
         for feature in self.variables:
             X[feature] = X[feature].fillna('Missing')
