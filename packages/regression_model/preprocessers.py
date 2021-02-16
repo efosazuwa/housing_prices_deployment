@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 
 #Categorical missing value imputer
-class CategoricalImputer(BaseEsimator, TransformerMixin):
+class CategoricalImputer(BaseEstimator, TransformerMixin):
 
     def __init__(self, variables=None):
         if not isinstance(variables, list):
@@ -23,7 +23,7 @@ class CategoricalImputer(BaseEsimator, TransformerMixin):
         return X
 
 #Numerical missing value imputer
-class NumericalImputer(BaseEsimator, TransformerMixin):
+class NumericalImputer(BaseEstimator, TransformerMixin):
 
     def __init__(self, variables=None):
         if not isinstance(variables, list):
