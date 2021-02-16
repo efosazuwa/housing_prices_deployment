@@ -106,7 +106,7 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
         temp = pd.concat([X, y], axis=1)
         temp.columns =  list(X.columns) + ['target']
 
-        self.encoder_dict_
+        self.encoder_dict_ = {}
 
         for var in self.variables:
             t = temp.groupby(var)['target'].mean().sort_values(ascending=True).index
