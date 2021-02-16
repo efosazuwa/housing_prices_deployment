@@ -120,7 +120,7 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
             X[feature] = X[feature].map(self.encoder_dict_[feature])
 
         #Check if transformer introduces any NaN
-        if X[self.variables].isnul().any().any():
+        if X[self.variables].isnull().any().any():
             null_counts = X[self.variables].isnull().any()
             vars_ = {key: value for key, value in null_counts.items() if value
                      is True}
