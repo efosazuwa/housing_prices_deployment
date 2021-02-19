@@ -1,1 +1,8 @@
+# Notebook Checkpoins
 .ipynb_checkpoints
+
+# Caches
+__pycache__/
+
+# Pickle Files
+*.pkl
